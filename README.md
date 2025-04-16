@@ -14,16 +14,16 @@ Python 脚本，使用 AI 技术将原始 RSS 源内容翻译成指定语言，�
 
 ## 使用方法
 - 提前在服务器装好Python3 环境，确保pip已安装，并安装所需库
-- 
+
 pip3 install feedparser feedgen openai python-dotenv pytz
 
-然后下载代码放到自己服务器上，
+然后下载本代码放到自己服务器上，
 
 - 使用的时候先修改**config.json**文件和**env**文件，
 
 把config.json里的注释全删除，默认模型是gpt-4.1-nano，实测用来翻译够用了，不满意也可以换你想用的模型，
 
-以及其他需要改的地方都在config.json里的注释都写了。
+以及其他需要改的地方都在config.json的注释里写了。
 
 ### 配置参数说明
 
@@ -44,7 +44,7 @@ pip3 install feedparser feedgen openai python-dotenv pytz
 
 默认分割字符数是10000，在78行和179行，改的话动这2行的数字，因为输入字符数多了以后nano容易翻译不准确，故设置的保守了点。
 
-**api_timeout** API 调用超时时间(秒), 默认120，也是设置的很保守，改的话在176行，这个是翻译等待的时间，并不是每次翻译都要等120秒才进行下一篇文章的翻译，
+**api_timeout**  API 调用超时时间(秒)，默认是120秒，也是设置的很保守，改的话在176行，这个是翻译等待的时间，并不是每次翻译都要等120秒才进行下一篇文章的翻译。
 
 如果10秒就出了翻译结果，那么脚本会立刻进行下一篇文章的翻译，如果120秒还没出结果，就会进入重试，一共会重试3次，都失败的话就使用原文，然后进行下一篇文章的翻译。
 
@@ -53,45 +53,45 @@ pip3 install feedparser feedgen openai python-dotenv pytz
 API有速率限制，添加短暂延迟避免触发限制，延迟时间**time.sleep**的设置在197行和238行，默认3秒。
 
 ### 运行脚本
-先cd到脚本所在文件夹，然后
+先cd到脚本所在文件夹，然后，
 
 python3 translate_rss.py
 
 ## 建议配置个域名，用CloudFlare代理下
 具体步骤问ai，大致步骤：
-1. DNS和Cloudflare设置，配置子域名。
+1. DNS和Cloudflare设置，配置域名。
 2. 服务器目录结构设置：创建脚本目录，创建XML输出目录，设置目录权限。
-3. Nginx配置：创建新的Nginx配置文件，启用该配置并验证
-4. 申请SSL证书,使用Certbot申请SSL证书
-这样可以做到使用https://你的域名/翻译后 Feed 的文件名.xml，这个链接来订阅翻译后的rss源，很方便，不使用域名的订阅方式我也没试过，自己问ai折腾下吧。
+3. Nginx配置：创建新的Nginx配置文件，启用该配置并验证。
+4. 申请SSL证书，使用Certbot申请SSL证书。
+这样可以做到使用https://你的域名/翻译后Feed的文件名.xml，这个链接来订阅翻译后的rss源，很方便，不使用域名的订阅方式我也没试过，自己问ai折腾下吧。
 
 ## 定期运行
 
-设置定时任务，先cd定位到文件夹，然后crontab -e
+设置定时任务，先cd定位到文件夹，然后**crontab -e**
 
 添加以下内容（每6小时运行一次）：
 
-0 */6 * * * cd /home/你的用户名/你的脚本所在文件夹名 && /usr/bin/python3 translate_rss.py >> translate.log 2>&1
+**0 */6 * * * cd /home/你的用户名/你的脚本所在文件夹名 && /usr/bin/python3 translate_rss.py >> translate.log 2>&1**
 
-为了避免日志文件无限增长，我使用了覆盖模式，添加的内容改成：
+为了避免日志文件无限增长，我使用了**覆盖模式**，添加的内容改成：
 
-0 */6 * * * cd /home/你的用户名/你的脚本所在文件夹名 && /usr/bin/python3 translate_rss.py > translate.log 2>&1
+**0 */6 * * * cd /home/你的用户名/你的脚本所在文件夹名 && /usr/bin/python3 translate_rss.py > translate.log 2>&1**
 
 使用 > 而不是 >> ，覆盖模式而不是追加模式，这样不需要额外的清空日志任务，因为每次运行时都会自动覆盖之前的日志。
 
 如果你的订阅源更新很频繁，可以把6小时改成2小时或者每小时，丰俭由人。
 
-手动测试 cron 任务
+**手动测试 cron 任务**
 
 可以直接在终端中运行与 crontab 中相同的命令来测试：
 
-cd /home/你的用户名/你的脚本所在文件夹名 && /usr/bin/python3 translate_rss.py > translate.log 2>&1
+**cd /home/你的用户名/你的脚本所在文件夹名 && /usr/bin/python3 translate_rss.py > translate.log 2>&1**
 
 想要看到实时输出？可以不使用重定向，直接执行：
 
-cd /home/你的用户名/你的脚本所在文件夹名 && /usr/bin/python3 translate_rss.py
+**cd /home/你的用户名/你的脚本所在文件夹名 && /usr/bin/python3 translate_rss.py**
 
-如果顺利的话，你的服务器就会定时启动翻译任务，然后更新翻译的rss源内容了，并且脚本生成的新rss源订阅链接是不变的，只需要在本地rss阅读器或者rss订阅服务里添加1次即可。
+如果顺利的话，你的服务器就会定时启动翻译任务，然后更新翻译的rss源内容了，并且脚本生成的**新rss源订阅链接是*不变的**，只需要在本地rss阅读器或者rss订阅服务里添加1次即可。
 
 ## 功能详细介绍
 
