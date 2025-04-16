@@ -1,6 +1,6 @@
 # RSSTranslate-AI
 A Python script that translates RSS feeds into specified languages using AI and generates new RSS subscription links. 
-Python 脚本，使用 AI 技术将原始 RSS 源内容翻译成指定语言，并生成新的可订阅 RSS 链接。
+**Python 脚本，使用 AI 技术将原始 RSS 源内容翻译成指定语言，并生成新的可订阅 RSS 链接。**
 
 ## 功能特点
 
@@ -15,15 +15,15 @@ Python 脚本，使用 AI 技术将原始 RSS 源内容翻译成指定语言，�
 ## 使用方法
 - 提前在服务器装好Python3 环境，确保pip已安装，并安装所需库
 
-pip3 install feedparser feedgen openai python-dotenv pytz
+**pip3 install feedparser feedgen openai python-dotenv pytz**
 
-然后下载本代码放到自己服务器上，
+然后下载本代码放到自己服务器上。
 
 - 使用的时候先修改**config.json**文件和**env**文件，
 
-把config.json里的注释全删除，默认模型是gpt-4.1-nano，实测用来翻译够用了，不满意也可以换你想用的模型，
+把**config.json**里的注释全删除，默认模型是**gpt-4.1-nano**，实测用来翻译够用了，不满意也可以换你想用的模型，
 
-以及其他需要改的地方都在config.json的注释里写了。
+以及其他需要改的地方都在**config.json**的注释里写了。
 
 ### 配置参数说明
 
@@ -40,13 +40,11 @@ pip3 install feedparser feedgen openai python-dotenv pytz
   
 ### PY脚本配置
 
-首次运行后会自动创建translate.log和translation_cache.json ，
+首次运行后会自动创建**translate.log**和**translation_cache.json** ，
 
-默认分割字符数是10000，在78行和179行，改的话动这2行的数字，因为输入字符数多了以后nano容易翻译不准确，故设置的保守了点。
+**默认分割字符数是10000**，在78行和179行，改的话动这2行的数字，因为输入字符数多了以后**gpt-4.1-nano**容易翻译不准确，故设置的保守了点。
 
-**api_timeout**  API 调用超时时间(秒)，默认是120秒，也是设置的很保守，改的话在176行，这个是翻译等待的时间，并不是每次翻译都要等120秒才进行下一篇文章的翻译。
-
-如果10秒就出了翻译结果，那么脚本会立刻进行下一篇文章的翻译，如果120秒还没出结果，就会进入重试，一共会重试3次，都失败的话就使用原文，然后进行下一篇文章的翻译。
+**api_timeout**  API 调用超时时间(秒)，默认是120秒，也是设置的很保守，改的话在176行，这个是翻译等待的时间，并不是每次翻译都要等120秒才进行下一篇文章的翻译。如果10秒就出了翻译结果，那么脚本会立刻进行下一篇文章的翻译，如果120秒还没出结果，就会进入重试，一共会重试3次，都失败的话就使用原文，然后进行下一篇文章的翻译。
 
 重试次数**max_retries**的设置在185行和222行，默认是3次。
 
@@ -55,7 +53,7 @@ API有速率限制，添加短暂延迟避免触发限制，延迟时间**time.s
 ### 运行脚本
 先cd到脚本所在文件夹，然后，
 
-python3 translate_rss.py
+**python3 translate_rss.py**
 
 ## 建议配置个域名，用CloudFlare代理下
 具体步骤问ai，大致步骤：
@@ -71,7 +69,9 @@ python3 translate_rss.py
 
 添加以下内容（每6小时运行一次）：
 
+```
 **0 */6 * * * cd /home/你的用户名/你的脚本所在文件夹名 && /usr/bin/python3 translate_rss.py >> translate.log 2>&1**
+```
 
 为了避免日志文件无限增长，我使用了**覆盖模式**，添加的内容改成：
 
