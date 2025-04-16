@@ -17,7 +17,7 @@ A Python script that translates RSS feeds into specified languages using AI and 
 
 **pip3 install feedparser feedgen openai python-dotenv pytz**
 
-     然后下载本代码放到自己服务器上。
+- 下载本代码放到自己服务器上。
 
 - 使用的时候先修改**config.json**文件和**env**文件，
 
