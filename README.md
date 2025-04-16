@@ -40,7 +40,7 @@ A Python script that translates RSS feeds into specified languages using AI and 
   
 ### PY脚本配置
 
-首次运行后会自动创建**translate.log**和**translation_cache.json** ，
+首次运行后会自动创建 **translate.log** 和 **translation_cache.json** ，
 
 **默认分割字符数是10000**，在78行和179行，改的话动这2行的数字，因为输入字符数多了以后**gpt-4.1-nano**容易翻译不准确，故设置的保守了点。
 
