@@ -68,5 +68,5 @@ python3 translate_rss.py
 
 ## 许可证
 
-GPL-3.0 license
+[GPL-3.0 license](https://raw.githubusercontent.com/ErchildeW/RSSTranslate-AI//main/LICENSE)
 
