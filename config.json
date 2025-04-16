@@ -1,5 +1,4 @@
 ### 实际用的时候一定删除本条注释和删除“### Add more RSS links 添加更多rss链接”，只写了openai的api，默认gpt4.1nano模型，英译中，请按自己情况修改模型和提示词，以及username、foldername、"original_url"、"output_file"、"title"、"max_items" 、"output_directory"、"cache_file"都要改成你服务器实际的名字和地址。
-### When actually using, be sure to delete this comment and remove "### Add more RSS links", only OpenAI API is written, default model is GPT-4.1 Nano, English to Chinese translation. Please modify the model and prompts according to your situation, and change username, foldername, "original_url", "output_file", "title", "max_items", "output_directory", "cache_file" to your server's actual names and addresses.
 
 {
   "openai_model": "gpt-4.1-nano",
@@ -16,7 +15,7 @@
       "output_file": "example.xml",
       "title": "example"
     }
-### Add more RSS links 添加更多rss链接
+### 添加更多rss链接
   ],
   "max_items": 15, 
   "output_directory": "/var/www/foldername/", 
