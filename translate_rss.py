@@ -111,7 +111,7 @@ def split_text(text, max_length=10000):
         
     return chunks
 
-def translate_api_call(text, model_name, system_prompt, timeout=60):
+def translate_api_call(text, model_name, system_prompt, timeout=120):
     """单次API调用来翻译文本"""
     # 设置请求头部和数据
     headers = {
