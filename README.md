@@ -25,6 +25,8 @@ A Python script that translates RSS feeds into specified languages using AI and 
 
 以及其他需要改的地方都在**config.json**的注释里写了。
 
+如果你使用的是中转api，记得改**OPENAI_API_BASE**。
+
 ### 配置参数说明
 
 - `output_directory`: 存储翻译后 RSS 文件的目录
