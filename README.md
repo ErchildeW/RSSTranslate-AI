@@ -69,13 +69,11 @@ API有速率限制，添加短暂延迟避免触发限制，延迟时间**time.s
 
 添加以下内容（每6小时运行一次）：
 
-```
-**0 */6 * * * cd /home/你的用户名/你的脚本所在文件夹名 && /usr/bin/python3 translate_rss.py >> translate.log 2>&1**
-```
+0 */6 * * * cd /home/你的用户名/你的脚本所在文件夹名 && /usr/bin/python3 translate_rss.py >> translate.log 2>&1
 
 为了避免日志文件无限增长，我使用了**覆盖模式**，添加的内容改成：
 
-**0 */6 * * * cd /home/你的用户名/你的脚本所在文件夹名 && /usr/bin/python3 translate_rss.py > translate.log 2>&1**
+0 */6 * * * cd /home/你的用户名/你的脚本所在文件夹名 && /usr/bin/python3 translate_rss.py > translate.log 2>&1
 
 使用 > 而不是 >> ，覆盖模式而不是追加模式，这样不需要额外的清空日志任务，因为每次运行时都会自动覆盖之前的日志。
 
