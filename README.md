@@ -27,6 +27,9 @@ A Python script that translates RSS feeds into specified languages using AI and 
 
 如果你使用的是中转api，记得改**OPENAI_API_BASE**。
 
+复制 `.env.example` 为 `.env`，然后在 `.env` 里填写你自己的 `OPENAI_API_KEY`。
+不要把 `.env` 提交到 GitHub。
+
 ### 配置参数说明
 
 - `output_directory`: 存储翻译后 RSS 文件的目录
